@@ -1,12 +1,14 @@
 ## Xplenty Python Wrapper
 
-The Xplenty PY is a python artifact that provides a simple wrapper for the [Xplenty REST Api Tasks](https://github.com/xplenty/xplenty-api-doc). To use it, create an XplentyClient object and call its methods to access the Xplenty API. This page describes the available XplentyClient methods.
+[ ![Codeship Status for xplenty/xplenty.py](https://codeship.com/projects/0e6524f0-8528-0133-0e8b-123c7a12e678/status?branch=master)](https://codeship.com/projects/122186)
+
+The Xplenty PY is a python artifact that provides a simple wrapper for the [Xplenty REST API](https://github.com/xplenty/xplenty-api-doc). To use it, create an XplentyClient object and call its methods to access the Xplenty API. This page describes the available XplentyClient methods.
 
 ### Installation
 
 Via pip:
 ```bash
-pip install git+git://github.com/xplenty/xplenty.py.git
+pip install xplenty
 ```
 
 ### Create an Xplenty Client Object
@@ -96,6 +98,26 @@ job_id = 235
 job = client.stop_job(job_id)
 print job.status
 ```
+
+### List All Packages
+
+This method returns the list of packages that were created by users in your account.
+You can use this information to display your packages and their properties.
+```python
+packages = client.packages
+print "Number of packages:",len(packages)
+for package in packages:
+    print package.id, package.name, package.created_at
+```
+### Get Package Information
+
+This method returns the details of the package with the given ID.
+```python
+id = 85
+package = client.get_package(id)
+print package.name
+```
+
 ## Contributing
 
 1. Fork it
