@@ -175,7 +175,6 @@ class XplentyClient(object):
 
         return job
 
-
     def get_account_limits(self):
 
         method_path = 'rate_limit_status'
@@ -186,8 +185,8 @@ class XplentyClient(object):
 
         return limit
 
-    def get_packages(self):
-        method_path = 'packages'
+    def get_packages(self, offset=0, limit=20):
+        method_path = 'packages?offset=%d&limit=%d' % (offset, limit)
         url = self._join_url(method_path)
         resp = self.get(url)
         packages = [Package.new_from_dict(item, h=self) for item in resp]
@@ -201,6 +200,18 @@ class XplentyClient(object):
         package = Package.new_from_dict(resp, h=self)
 
         return package
+
+    def get_schedules(self):
+        method_path = 'schedules'
+        url = self._join_url(method_path)
+        resp = self.get(url)
+        return [Schedule.new_from_dict(item, h=self) for item in resp]
+
+    def get_schedule(self, id):
+        method_path = 'schedules/%s' % id
+        url = self._join_url(method_path)
+        resp = self.get(url)
+        return Schedule.new_from_dict(resp, h=self)
 
     @property
     def clusters(self):
@@ -217,3 +228,7 @@ class XplentyClient(object):
     @property
     def packages(self):
         return self.get_packages()
+
+    @property
+    def schedules(self):
+        return self.get_schedules()

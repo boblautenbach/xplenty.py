@@ -262,3 +262,17 @@ class Package(BaseModel):
 
     def __repr__(self):
         return "<Package '{0}'>".format(self.name)
+
+
+class Schedule(BaseModel):
+    """Xplenty Schedule."""
+
+    _strs = ['name','description', 'url', 'html_url', 'interval_unit', 'last_run_status', 'status']
+    _ints = ['id','owner_id', 'interval_amount', 'execution_count']
+    _floats = []
+    _dates = ['created_at','updated_at', 'start_at', 'next_run_at', 'last_run_at']
+    _dicts = ['variables', 'task']
+    _pks = ['id']
+
+    def __repr__(self):
+        return "<Schedule '{0}'>".format(self.name)
