@@ -170,12 +170,12 @@ class Cluster(BaseModel):
     """Xplenty Cluster."""
 
     _strs = [
-        'name','description','status','type', 'url', 'html_url', 'stack',
+        'name', 'description', 'status', 'type', 'url', 'html_url', 'stack',
         'region', 'zone', 'master_instance_type', 'slave_instance_type'
     ]
-    _ints = ['id','owner_id','nodes', 'running_jobs_count', 'time_to_idle', 'plan_id']
+    _ints = ['id', 'owner_id', 'nodes', 'running_jobs_count', 'time_to_idle', 'plan_id']
     _floats = ['master_spot_price', 'slave_spot_price', 'master_spot_percentage', 'slave_spot_percentage']
-    _dates = ['created_at','updated_at', 'available_since', 'terminated_at', 'idle_since']
+    _dates = ['created_at', 'updated_at', 'available_since', 'terminated_at', 'idle_since']
     _bools = ['terminate_on_idle', 'terminated_on_idle', 'allow_fallback']
     _lists = ['bootstrap_actions']
     _dicts = ['creator']
@@ -225,11 +225,11 @@ class Creator(BaseModel):
 class Job(BaseModel):
     """Xplenty Job."""
 
-    _strs = ['errors','status','url','html_url','log_url']
-    _ints = ['id','cluster_id','outputs_count','owner_id','package_id','runtime_in_seconds']
+    _strs = ['errors', 'status', 'url', 'html_url', 'log_url']
+    _ints = ['id', 'cluster_id', 'outputs_count', 'owner_id', 'package_id', 'runtime_in_seconds']
     _floats = ['progress']
-    _dates = ['created_at','started_at','updated_at','failed_at','completed_at']
-    _dicts = ['variables','dynamic_variables']
+    _dates = ['created_at', 'started_at', 'updated_at', 'failed_at', 'completed_at']
+    _dicts = ['variables', 'dynamic_variables']
     _map = {
         'outputs': [Output],
         'cluster': Cluster,
@@ -244,7 +244,7 @@ class Job(BaseModel):
 class AccountLimits(BaseModel):
     """Xplenty Account limits."""
 
-    _ints = ['limit','remaining']
+    _ints = ['limit', 'remaining']
 
     def __repr__(self):
         return "<AccountLimits '{0}'>".format(self.name)
@@ -267,10 +267,10 @@ class Package(BaseModel):
 class Schedule(BaseModel):
     """Xplenty Schedule."""
 
-    _strs = ['name','description', 'url', 'html_url', 'interval_unit', 'last_run_status', 'status']
-    _ints = ['id','owner_id', 'interval_amount', 'execution_count']
+    _strs = ['name', 'description', 'url', 'html_url', 'interval_unit', 'last_run_status', 'status']
+    _ints = ['id', 'owner_id', 'interval_amount', 'execution_count']
     _floats = []
-    _dates = ['created_at','updated_at', 'start_at', 'next_run_at', 'last_run_at']
+    _dates = ['created_at', 'updated_at', 'start_at', 'next_run_at', 'last_run_at']
     _dicts = ['variables', 'task']
     _pks = ['id']
 

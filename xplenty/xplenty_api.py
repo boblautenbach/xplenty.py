@@ -45,7 +45,7 @@ class XplentyClient(object):
     def __repr__(self):
         return '<Xplenty client at 0x%x>' % (id(self))
 
-    def get(self,url):
+    def get(self, url):
         logger.debug("GET %s", url)
         request = urllib.request.Request(url, headers=HEADERS)
         base64string = base64.encodestring('%s' % (self.api_key)).replace('\n', '')
@@ -88,7 +88,7 @@ class XplentyClient(object):
 
     def _join_url(self, method):
         _url = API_URL % ( self.account_id )
-        url = urljoin(_url , method )
+        url = urljoin(_url, method )
         return url
 
     def get_clusters(self):
@@ -99,7 +99,7 @@ class XplentyClient(object):
 
         return clusters
 
-    def get_cluster(self,id):
+    def get_cluster(self, id):
         method_path = 'clusters/%s'%(str(id))
         url = self._join_url( method_path )
         resp = self.get(url)
@@ -107,7 +107,7 @@ class XplentyClient(object):
 
         return cluster
 
-    def terminate_cluster(self,id):
+    def terminate_cluster(self, id):
         method_path = 'clusters/%s'%(str(id))
         url = self._join_url( method_path )
         resp = self.delete(url)
@@ -125,7 +125,7 @@ class XplentyClient(object):
         cluster_info["cluster[time_to_idle]"]= time_to_idle
         method_path = 'clusters'
         url = self._join_url( method_path )
-        resp = self.post(url,cluster_info)
+        resp = self.post(url, cluster_info)
         cluster =  Cluster.new_from_dict(resp, h=self)
 
         return cluster
@@ -139,7 +139,7 @@ class XplentyClient(object):
 
         return jobs
 
-    def get_job(self,id):
+    def get_job(self, id):
         method_path = 'jobs/%s'%(str(id))
         url = self._join_url( method_path )
         resp =self.get(url)
@@ -147,7 +147,7 @@ class XplentyClient(object):
 
         return job
 
-    def stop_job(self,id):
+    def stop_job(self, id):
         method_path = 'jobs/%s'%(str(id))
         url = self._join_url( method_path )
         resp = self.delete(url)
@@ -170,7 +170,7 @@ class XplentyClient(object):
 
         method_path = 'jobs'
         url = self._join_url( method_path )
-        resp = self.post(url,job_info)
+        resp = self.post(url, job_info)
         job =  Job.new_from_dict(resp, h=self)
 
         return job
