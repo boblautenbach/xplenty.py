@@ -67,7 +67,7 @@ def to_python(obj,
                 d[in_key] = dict(in_dict.get(in_key))
 
     if object_map:
-        for (k, v) in object_map.items():
+        for (k, v) in list(object_map.items()):
             if in_dict.get(k):
                 if isinstance(v, list):
                     v = v[0]
@@ -115,7 +115,7 @@ class BaseModel(object):
     def _keys(self):
         return (
             self._strs + self._ints + self._dates + self._lists +
-            self._bools + self._map.keys() + self._dicts + self._floats
+            self._bools + list(self._map.keys()) + self._dicts + self._floats
         )
 
     @property
