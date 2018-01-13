@@ -53,7 +53,7 @@ class XplentyClient(object):
 
         try:
             resp = urllib.request.urlopen(request)
-        except urllib.error.HTTPError, error:
+        except urllib.error.HTTPError as error:
             raise XplentyAPIException(error)
 
         return json.loads(resp.read())
@@ -68,7 +68,7 @@ class XplentyClient(object):
 
         try:
             resp = urllib.request.urlopen(request)
-        except urllib.error.HTTPError, error:
+        except urllib.error.HTTPError as error:
             raise XplentyAPIException(error)
 
         return json.loads(resp.read())
@@ -81,7 +81,7 @@ class XplentyClient(object):
 
         try:
             resp = urllib.request.urlopen(request)
-        except urllib.error.HTTPError, error:
+        except urllib.error.HTTPError as error:
             raise XplentyAPIException(error)
 
         return json.loads(resp.read())
