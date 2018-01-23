@@ -40,16 +40,20 @@ class XplentyClient(object):
 
     def __init__(self, account_id="", api_key=""):
         self.account_id = account_id
-        self.api_key = api_key
+        # Ensure `api_key` is bytes to encode it with `base64.encodestring`
+        self.api_key = ('%s' % api_key).encode('utf-8')
 
     def __repr__(self):
         return '<Xplenty client at 0x%x>' % (id(self))
 
+    def add_auth_header(self, request):
+        base64api_key = base64.encodestring(self.api_key).decode('utf-8').replace('\n', '')
+        request.add_header("Authorization", "Basic %s" % base64api_key)
+
     def get(self, url):
         logger.debug("GET %s", url)
         request = urllib.request.Request(url, headers=HEADERS)
-        base64string = base64.encodestring('%s' % (self.api_key)).replace('\n', '')
-        request.add_header("Authorization", "Basic %s" % base64string)
+        self.add_auth_header(request)
 
         try:
             resp = urllib.request.urlopen(request)
@@ -63,8 +67,7 @@ class XplentyClient(object):
         logger.debug("POST %s, data %s", url, encoded_data)
 
         request = urllib.request.Request(url, data=encoded_data, headers=HEADERS)
-        base64string = base64.encodestring('%s' % (self.api_key)).replace('\n', '')
-        request.add_header("Authorization", "Basic %s" % base64string)
+        self.add_auth_header(request)
 
         try:
             resp = urllib.request.urlopen(request)
@@ -76,8 +79,7 @@ class XplentyClient(object):
     def delete(self, url):
         logger.debug("DELETE %s", url)
         request = RequestWithMethod(url, 'DELETE', headers=HEADERS)
-        base64string = base64.encodestring('%s' % (self.api_key)).replace('\n', '')
-        request.add_header("Authorization", "Basic %s" % base64string)
+        self.add_auth_header(request)
 
         try:
             resp = urllib.request.urlopen(request)
