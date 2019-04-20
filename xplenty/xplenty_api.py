@@ -37,6 +37,7 @@ def to_python(obj,
     dict_keys=None,
     **kwargs):
     """Extends a given object for API Consumption.
+
     :param obj: Object to extend.
     :param in_dict: Dict to extract data from.
     :param string_keys: List of in_dict keys that will be extracted as strings.
