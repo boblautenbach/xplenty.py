@@ -127,7 +127,7 @@ class XplentyClient(object):
         cluster_info["cluster[time_to_idle]"]= time_to_idle
         method_path = 'clusters'
         url = self._join_url( method_path )
-        resp = self.post(url, urllib.parse.urlencode((cluster_info))
+        resp = self.post(url, urllib.parse.urlencode(cluster_info))
         cluster =  Cluster.new_from_dict(resp, h=self)
 
         return cluster
